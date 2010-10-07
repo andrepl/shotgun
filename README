@@ -1,0 +1,16 @@
+shotgun is a unix shell utility which can be used to parallelize long-running processes that operate on data from stdin.
+
+Examples:
+lets say we have a fast-growing log file.  we also have a program which
+reads lines from stdin, does some CPU intensive work, and then inserts 
+them into a database.  if we can parallelize the expensive work, we can
+save a lot of time.  thats where shotgun comes in.
+
+    $ tail -f test.log | shotgun.py -p 4 -c "crunch"
+
+in the above example, shotgun launches 4 instances of the 'crunch'
+program. it then reads lines  from the tail -f command and will distribute
+those lines across the pool of subprocesses, writing to their stdin.
+
+
+
